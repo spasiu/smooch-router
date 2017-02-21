@@ -22,9 +22,11 @@ const handleEvents = (data, cb) => {
     // respond fast
     cb(null);
 
-    const isBot = data.event.bot_id;
+    if (data.token !== verificationToken) {
+        return cb(null);
+    }
 
-    if (!isBot) {
+    if (!data.event.bot_id) {
         return;
     }
 
